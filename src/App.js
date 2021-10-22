@@ -21,21 +21,22 @@ class App extends Component {
   componentDidMount() {
     //console.log('App componentDidMount');
 
-    const contacts = localStorage.getItem('todos');
-    const parseContacts = JSON.parse(contacts);
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
 
-    if (parseContacts) {
-      this.setState({ contacts: parseContacts });
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     //console.log('App componentDidUpdate');
 
-    if (this.state.contacts !== prevState.contacts) {
-      console.log('Update');
+    const nextContacts = this.state.contacts;
+    const prevContacts = prevState.contacts;
 
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    if (nextContacts !== prevContacts) {
+      localStorage.setItem('contacts', JSON.stringify(nextContacts));
     }
   }
 
